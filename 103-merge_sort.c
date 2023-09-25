@@ -1,6 +1,5 @@
-#include <stdlib.h>
-#include <stdio.h>
 #include "sort.h"
+
 
 /**
  * merge - Merge two subarrays into one sorted array
@@ -11,9 +10,6 @@
  */
 void merge(int *array, size_t size, int *left, int *right)
 {
-	size_t i = 0, j = 0, k = 0;
-	size_t left_size = size / 2;
-	size_t right_size = size - left_size;
 
 	printf("Merging...\n");
 	printf("[left]: ");
