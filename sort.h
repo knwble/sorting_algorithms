@@ -3,6 +3,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stddef.h>
+
 
 #define UP 0
 #define DOWN 1
