@@ -2,61 +2,46 @@
 
 /**
  * counting_sort - Sorts an array of integers in ascending order using
- *                 the Counting Sort algorithm.
+ *                the Counting Sort algorithm.
  * @array: The array to be sorted.
  * @size: The size of the array.
  */
 void counting_sort(int *array, size_t size)
 {
-	int max = 0, i;
-	int *count_array = NULL;
-	int *output_array = NULL;
-
 	if (array == NULL || size < 2)
 		return;
 
-	/* Find the maximum element in the array */
-	for (i = 0; i < (int)size; i++)
+	/* Find the maximum value in the input array */
+	int max = array[0];
+	for (size_t i = 1; i < size; i++)
 	{
 		if (array[i] > max)
 			max = array[i];
 	}
 
-	count_array = malloc(sizeof(int) * (max + 1));
-	output_array = malloc(sizeof(int) * size);
-
-	if (count_array == NULL || output_array == NULL)
+	/* Create a counting array and initialize it to zero */
+	int *count = malloc((max + 1) * sizeof(int));
+	if (count == NULL)
 		return;
 
-	/* Initialize count_array with zeros */
-	for (i = 0; i <= max; i++)
-		count_array[i] = 0;
+	for (int i = 0; i <= max; i++)
+		count[i] = 0;
 
-	/* Count the occurrences of each element in array */
-	for (i = 0; i < (int)size; i++)
-		count_array[array[i]]++;
+	/* Count the occurrences of each element in the input array */
+	for (size_t i = 0; i < size; i++)
+		count[array[i]]++;
 
-	/* Update count_array to store the cumulative sum */
-	for (i = 1; i <= max; i++)
-		count_array[i] += count_array[i - 1];
-
-	/* Build the output array using the count_array */
-	for (i = (int)size - 1; i >= 0; i--)
+	/* Reconstruct the sorted array from the counting array */
+	int index = 0;
+	for (int i = 0; i <= max; i++)
 	{
-		output_array[count_array[array[i]] - 1] = array[i];
-		count_array[array[i]]--;
+		while (count[i] > 0)
+		{
+			array[index] = i;
+			index++;
+			count[i]--;
+		}
 	}
 
-	/* Copy the sorted elements back to the original array */
-	for (i = 0; i < (int)size; i++)
-		array[i] = output_array[i];
-
-	printf("%d", count_array[0]);
-	for (i = 1; i <= max; i++)
-		printf(", %d", count_array[i]);
-	printf("\n");
-
-	/* Free allocated memory */
-	free(count_array);
-	free(output_array);
+	free(count);
 }
