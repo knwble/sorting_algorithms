@@ -1,8 +1,8 @@
 #include "sort.h"
 
 /**
- * insertion_sort_list - Sorts a doubly linked list of integers in ascending order
- *                       using the Insertion Sort algorithm.
+ * insertion_sort_list - Sorts a doubly linked list of integers in ascending
+ *						order using the Insertion Sort algorithm.
  * @list: A pointer to the head of a doubly-linked list of integers.
  *
  * Description: Prints the list after each time you swap two elements.
