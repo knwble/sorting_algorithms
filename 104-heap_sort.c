@@ -21,6 +21,7 @@ void sift_down(int *array, size_t size, size_t start, size_t end)
 		if (array[root] < array[child])
 		{
 			int temp = array[root];
+
 			array[root] = array[child];
 			array[child] = temp;
 			print_array(array, size);
@@ -47,14 +48,17 @@ void heap_sort(int *array, size_t size)
 	for (i = size / 2; i > 0; i--)
 	{
 		size_t j = i - 1;
+
 		sift_down(array, size, j, size - 1);
 	}
 
 	for (i = size - 1; i > 0; i--)
 	{
 		int temp = array[0];
+
 		array[0] = array[i];
 		array[i] = temp;
+
 		print_array(array, size);
 		sift_down(array, size, 0, i - 1);
 	}
